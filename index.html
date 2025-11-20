@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Which Tees Should I Play? | Simple Golf Tee Selector</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Not sure which golf tees to play from? Use this simple tee selection calculator based on your driver distance, age, and handicap." />
+
+  <style>
+    :root {
+      --bg: #0b1724;
+      --card: #101c2b;
+      --accent: #2ecc71;
+      --accent-soft: rgba(46, 204, 113, 0.2);
+      --text: #f5f7fa;
+      --muted: #9ca8ba;
+      --danger: #e74c3c;
+      --border: #243247;
+      --shadow: 0 18px 35px rgba(0, 0, 0, 0.35);
+      --radius-lg: 14px;
+      --radius-sm: 8px;
+      --transition: 0.2s ease-out;
+      --font-main: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: var(--font-main);
+      background: radial-gradient(circle at top, #15253a 0, #050913 55%, #020308 100%);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      align-items: stretch;
+      justify-content: center;
+    }
+
+    .page {
+      max-width: 960px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 32px 18px 44px;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 28px;
+    }
+
+    header h1 {
+      font-size: 2.1rem;
+      margin: 0 0 8px;
+      letter-spacing: 0.02em;
+    }
+
+    header p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.98rem;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(0, 3fr) minmax(0, 2.4fr);
+      gap: 20px;
+    }
+
+    @media (max-width: 800px) {
+      .layout {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .card {
+      background: linear-gradient(135deg, #111d2e 0%, #0a1420 70%);
+      border-radius: var(--radius-lg);
+      padding: 20px 18px;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border);
+    }
+
+    h2 {
+      font-size: 1.15rem;
+      margin: 0 0 14px;
+    }
+
+    .field {
+      margin-bottom: 14px;
+    }
+
+    .field label {
+      display: block;
+      font-size: 0.92rem;
+      margin-bottom: 4px;
+      color: var(--muted);
+    }
+
+    .field-row {
+      display: flex;
+      gap: 10px;
+    }
+
+    input[type="number"],
+    select {
+      width: 100%;
+      padding: 9px 10px;
+      border-radius: var(--radius-sm);
+      border: 1px solid #253248;
+      background: #060c17;
+      color: var(--text);
+      font-size: 0.96rem;
+      outline: none;
+      transition: border var(--transition), box-shadow var(--transition), transform var(--transition);
+    }
+
+    input[type="number"]:focus,
+    select:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 1px var(--accent-soft);
+      transform: translateY(-1px);
+    }
+
+    input[type="number"]::placeholder {
+      color: #4d5a6e;
+    }
+
+    .helper {
+      font-size: 0.8rem;
+      color: #6b7a90;
+      margin-top: 2px;
+    }
+
+    .btn-row {
+      margin-top: 12px;
+      display: flex;
+      gap: 8px;
+    }
+
+    button {
+      border-radius: 999px;
+      border: none;
+      padding: 9px 18px;
+      font-size: 0.96rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      letter-spacing: 0.01em;
+      transition: background var(--transition), transform var(--transition), box-shadow var(--transition), opacity var(--transition);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #2ecc71, #27ae60);
+      color: #04100a;
+      box-shadow: 0 10px 22px rgba(39, 174, 96, 0.35);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 16px 30px rgba(39, 174, 96, 0.5);
+    }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--muted);
+      border: 1px solid #283449;
+    }
+
+    .btn-ghost:hover {
+      background: #0b1625;
+    }
+
+    .result-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 8px;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 9px;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      background: rgba(46, 204, 113, 0.15);
+      color: var(--accent);
+      border: 1px solid rgba(46, 204, 113, 0.4);
+    }
+
+    .pill span {
+      font-weight: 600;
+      text-transform: uppercase;
+      font-size: 0.7rem;
+      letter-spacing: 0.08em;
+    }
+
+    .result-main {
+      margin-bottom: 8px;
+    }
+
+    .tee-name {
+      font-size: 1.4rem;
+      font-weight: 700;
+    }
+
+    .tee-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.82rem;
+      padding: 3px 9px;
+      border-radius: 999px;
+      border: 1px solid #27334a;
+      background: #070f1b;
+      color: var(--muted);
+      margin-left: 6px;
+    }
+
+    .tee-chip-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: #f1c40f;
+    }
+
+    .tee-chip.blue .tee-chip-dot { background: #3498db; }
+    .tee-chip.white .tee-chip-dot { background: #ecf0f1; }
+    .tee-chip.gold .tee-chip-dot { background: #f1c40f; }
+    .tee-chip.red .tee-chip-dot { background: #e74c3c; }
+    .tee-chip.black .tee-chip-dot { background: #000; }
+
+    .result-sub {
+      font-size: 0.92rem;
+      color: var(--muted);
+    }
+
+    .metrics {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 10px 0 12px;
+    }
+
+    .metric {
+      padding: 6px 9px;
+      font-size: 0.8rem;
+      border-radius: 999px;
+      background: #070f1b;
+      border: 1px solid #283549;
+      color: var(--muted);
+    }
+
+    .metric strong {
+      color: #d6deea;
+    }
+
+    .tip {
+      font-size: 0.85rem;
+      color: #95a2b8;
+      border-top: 1px dashed #263247;
+      padding-top: 8px;
+      margin-top: 4px;
+    }
+
+    .tip span {
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .error {
+      font-size: 0.8rem;
+      color: var(--danger);
+      margin-top: 4px;
+    }
+
+    /* Right column: monetization & SEO content */
+
+    .ad-block {
+      background: #060c14;
+      border-radius: var(--radius-lg);
+      border: 1px dashed #303c51;
+      padding: 12px 10px;
+      font-size: 0.78rem;
+      color: #7c8aa0;
+      margin-bottom: 14px;
+      text-align: center;
+    }
+
+    .ad-tag {
+      display: inline-block;
+      padding: 3px 8px;
+      border-radius: 999px;
+      border: 1px solid #3a475d;
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 6px;
+      color: #9aa7bd;
+    }
+
+    .gear-list {
+      list-style: none;
+      padding: 0;
+      margin: 8px 0 0;
+      font-size: 0.85rem;
+    }
+
+    .gear-list li + li {
+      margin-top: 4px;
+    }
+
+    .gear-list a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    .gear-list a:hover {
+      text-decoration: underline;
+    }
+
+    .seo-text {
+      margin-top: 10px;
+      font-size: 0.86rem;
+      color: #9ca8bc;
+      line-height: 1.45;
+    }
+
+    .seo-text h3 {
+      font-size: 0.95rem;
+      margin: 8px 0 4px;
+      color: #d7e1f1;
+    }
+
+    .seo-text p {
+      margin: 4px 0;
+    }
+
+    footer {
+      margin-top: 28px;
+      font-size: 0.75rem;
+      color: #6c7a90;
+      text-align: center;
+    }
+
+    footer a {
+      color: #9fb2d4;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header>
+      <h1>Which Tees Should I Play?</h1>
+      <p>Use this simple golf tee selector based on your driver distance, age, and handicap. Eight seconds, no ego.</p>
+    </header>
+
+    <main class="layout">
+      <!-- Left: Calculator -->
+      <section class="card">
+        <h2>Golf Tee Selection Calculator</h2>
+
+        <form id="teeForm" novalidate>
+          <div class="field">
+            <label for="driverDistance">Average driver carry distance (yards)</label>
+            <input
+              type="number"
+              id="driverDistance"
+              placeholder="e.g. 240"
+              min="80"
+              max="350"
+              required
+            />
+            <div class="helper">Use your typical carry, not your absolute best bomb.</div>
+            <div class="error" id="driverError"></div>
+          </div>
+
+          <div class="field-row">
+            <div class="field">
+              <label for="age">Age</label>
+              <input
+                type="number"
+                id="age"
+                placeholder="e.g. 38"
+                min="10"
+                max="100"
+              />
+            </div>
+
+            <div class="field">
+              <label for="handicap">Handicap (approx)</label>
+              <input
+                type="number"
+                id="handicap"
+                placeholder="e.g. 12"
+                min="-5"
+                max="40"
+              />
+              <div class="helper">If you don’t know, 18 is a good guess.</div>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="challenge">Preferred challenge level</label>
+            <select id="challenge">
+              <option value="fair">Fair & fun (recommended)</option>
+              <option value="easy">Easier / quicker</option>
+              <option value="tough">I like a challenge</option>
+            </select>
+          </div>
+
+          <div class="btn-row">
+            <button type="submit" class="btn-primary">
+              Get Tee Recommendation
+              <span>→</span>
+            </button>
+            <button type="button" class="btn-ghost" id="resetBtn">
+              Reset
+            </button>
+          </div>
+        </form>
+
+        <div id="result" style="margin-top: 20px;">
+          <div class="result-header">
+            <div class="pill">
+              <span>RESULT</span> Tee suggestion based on your inputs
+            </div>
+          </div>
+
+          <div class="result-main">
+            <div class="tee-name" id="teeName">Enter your details to see a tee suggestion.</div>
+            <div class="result-sub" id="teeSubText">
+              This tool uses common rules of thumb used by teaching pros to match your distance to a comfortable course length.
+            </div>
+          </div>
+
+          <div class="metrics" id="metricsRow" style="display:none;">
+            <div class="metric">
+              Ideal total yardage: <strong id="yardageMetric"></strong>
+            </div>
+            <div class="metric">
+              Suggested tee range: <strong id="rangeMetric"></strong>
+            </div>
+            <div class="metric">
+              Pace & fun factor: <strong id="funMetric"></strong>
+            </div>
+          </div>
+
+          <div class="tip" id="tipText" style="display:none;">
+            <span>Pro tip:</span> If you’re hitting hybrids or woods into nearly every green, move up a set of tees. Golf is supposed to be fun.
+          </div>
+        </div>
+      </section>
+
+      <!-- Right: Monetization + SEO copy -->
+      <aside class="card">
+        <!-- Placeholder for AdSense (or any ad script) -->
+        <div class="ad-block">
+          <div class="ad-tag">Ad space</div>
+          <!-- Replace this with your AdSense code or other ad network script -->
+          <div>
+            Your ad could go here – golf balls, rangefinders, tees, or local course deals.
+          </div>
+        </div>
+
+        <!-- Simple affiliate block -->
+        <h2>Recommended Gear for Your Tee Choice</h2>
+        <ul class="gear-list" id="gearList">
+          <li>
+            • <a href="#" target="_blank" rel="nofollow noopener">Premium distance golf balls</a>
+          </li>
+          <li>
+            • <a href="#" target="_blank" rel="nofollow noopener">Adjustable golf tees for consistent height</a>
+          </li>
+          <li>
+            • <a href="#" target="_blank" rel="nofollow noopener">Launch monitor to dial in driver distance</a>
+          </li>
+        </ul>
+
+        <div class="seo-text">
+          <h3>How to Choose the Right Tees in Golf</h3>
+          <p>
+            A simple rule many coaches use: take your average driver carry distance and
+            multiply it by roughly <strong>36</strong>. That gives you a ballpark total
+            yardage for a course that will feel fair but still challenging.
+          </p>
+          <p>
+            Playing tees that are too long turns every hole into a grind. You’re hitting
+            long irons or hybrids into every green, pace of play slows down, and scores
+            balloon. Playing a tee that’s slightly shorter usually means more wedges,
+            more birdie chances, and more fun.
+          </p>
+          <h3>General Yardage Guidelines</h3>
+          <p>
+            For many golfers, comfortable total yardages fall into these rough ranges:
+          </p>
+          <ul>
+            <li>Forward / Red: under 4,800 yards</li>
+            <li>Gold / Senior: 4,800–5,600 yards</li>
+            <li>White / Regular: 5,600–6,400 yards</li>
+            <li>Blue: 6,400–7,000 yards</li>
+            <li>Back / Black: above 7,000 yards</li>
+          </ul>
+          <p>
+            Use this calculator as a starting point, then adjust based on how often
+            you’re actually reaching greens in regulation.
+          </p>
+        </div>
+      </aside>
+    </main>
+
+    <footer>
+      This tool is for general guidance only and doesn’t replace course or pro recommendations.
+      <!-- Optional: your name / brand -->
+      <!-- Built by <a href="#">YourGolfSite.com</a> -->
+    </footer>
+  </div>
+
+  <script>
+    const teeForm = document.getElementById('teeForm');
+    const driverInput = document.getElementById('driverDistance');
+    const ageInput = document.getElementById('age');
+    const handicapInput = document.getElementById('handicap');
+    const challengeSelect = document.getElementById('challenge');
+    const resetBtn = document.getElementById('resetBtn');
+
+    const driverError = document.getElementById('driverError');
+
+    const teeNameEl = document.getElementById('teeName');
+    const teeSubTextEl = document.getElementById('teeSubText');
+    const metricsRow = document.getElementById('metricsRow');
+    const yardageMetricEl = document.getElementById('yardageMetric');
+    const rangeMetricEl = document.getElementById('rangeMetric');
+    const funMetricEl = document.getElementById('funMetric');
+    const tipTextEl = document.getElementById('tipText');
+    const gearListEl = document.getElementById('gearList');
+
+    function categorizeTee(yardage) {
+      if (yardage < 4800) {
+        return { name: 'Forward Tees', key: 'red', range: 'Under 4,800 yards' };
+      } else if (yardage < 5600) {
+        return { name: 'Gold / Senior Tees', key: 'gold', range: '4,800 – 5,600 yards' };
+      } else if (yardage < 6400) {
+        return { name: 'White / Regular Tees', key: 'white', range: '5,600 – 6,400 yards' };
+      } else if (yardage < 7200) {
+        return { name: 'Blue Tees', key: 'blue', range: '6,400 – 7,200 yards' };
+      } else {
+        return { name: 'Back / Championship Tees', key: 'black', range: '7,200+ yards' };
+      }
+    }
+
+    function adjustYardage(ideal, age, handicap, challenge) {
+      let adjusted = ideal;
+
+      // Age adjustments
+      if (age && age >= 60) {
+        adjusted -= 300;
+      } else if (age && age <= 18) {
+        adjusted += 150;
+      }
+
+      // Handicap adjustments
+      if (handicap && handicap > 20) {
+        adjusted -= 200;
+      } else if (handicap && handicap < 5) {
+        adjusted += 150;
+      }
+
+      // Challenge preference
+      if (challenge === 'easy') {
+        adjusted -= 200;
+      } else if (challenge === 'tough') {
+        adjusted += 200;
+      }
+
+      // Clamp to a reasonable range
+      if (adjusted < 4000) adjusted = 4000;
+      if (adjusted > 7600) adjusted = 7600;
+
+      return Math.round(adjusted / 10) * 10; // round to nearest 10
+    }
+
+    function updateGearList(teeKey) {
+      let html = '';
+
+      if (teeKey === 'red' || teeKey === 'gold') {
+        html += '<li>• <a href="#" target="_blank" rel="nofollow noopener">Higher launch game-improvement irons</a></li>';
+        html += '<li>• <a href="#" target="_blank" rel="nofollow noopener">Soft-feel golf balls for more control</a></li>';
+        html += '<li>• <a href="#" target="_blank" rel="nofollow noopener">Lightweight cart bag for easy walking</a></li>';
+      } else if (teeKey === 'white' || teeKey === 'blue') {
+        html += '<li>• <a href="#" target="_blank" rel="nofollow noopener">Mid-spin tour performance balls</a></li>';
+        html += '<li>• <a href="#" target="_blank" rel="nofollow noopener">Rangefinder to dial in approach yardages</a></li>';
+        html += '<li>• <a href="#" target="_blank" rel="nofollow noopener">Alignment sticks for consistent setup</a></li>';
+      } else if (teeKey === 'black') {
+        html += '<li>• <a href="#" target="_blank" rel="nofollow noopener">Low-spin tour balls for high swing speeds</a></li>';
+        html += '<li>• <a href="#" target="_blank" rel="nofollow noopener">Launch monitor to optimize driver numbers</a></li>';
+        html += '<li>• <a href="#" target="_blank" rel="nofollow noopener">Premium wedge set with fresh grooves</a></li>';
+      } else {
+        html += '<li>• <a href="#" target="_blank" rel="nofollow noopener">Premium distance golf balls</a></li>';
+        html += '<li>• <a href="#" target="_blank" rel="nofollow noopener">Adjustable golf tees for consistent height</a></li>';
+        html += '<li>• <a href="#" target="_blank" rel="nofollow noopener">Launch monitor to dial in driver distance</a></li>';
+      }
+
+      gearListEl.innerHTML = html;
+    }
+
+    teeForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      driverError.textContent = '';
+
+      const driverVal = parseFloat(driverInput.value);
+      const ageVal = ageInput.value ? parseInt(ageInput.value, 10) : null;
+      const handicapVal = handicapInput.value ? parseInt(handicapInput.value, 10) : null;
+      const challengeVal = challengeSelect.value;
+
+      if (isNaN(driverVal) || driverVal < 80 || driverVal > 350) {
+        driverError.textContent = 'Please enter a realistic driver carry between 80 and 350 yards.';
+        return;
+      }
+
+      // Base ideal yardage: driver carry * 36 (common rule of thumb)
+      const idealYardage = driverVal * 36;
+      const adjustedYardage = adjustYardage(idealYardage, ageVal, handicapVal, challengeVal);
+      const tee = categorizeTee(adjustedYardage);
+
+      teeNameEl.innerHTML = `
+        ${tee.name}
+        <span class="tee-chip ${tee.key}">
+          <span class="tee-chip-dot"></span>
+          Suggested tee set
+        </span>
+      `;
+
+      let subText = `Based on a driver carry of about ${Math.round(driverVal)} yards, you’ll likely have the most fun playing from the ${tee.name.toLowerCase()}.`;
+
+      if (handicapVal !== null && handicapVal > 20) {
+        subText += ' Because your handicap is on the higher side, moving up slightly should help pace of play and confidence.';
+      } else if (handicapVal !== null && handicapVal < 8) {
+        subText += ' With a lower handicap, you can handle a bit more yardage if the course conditions allow.';
+      }
+
+      teeSubTextEl.textContent = subText;
+
+      metricsRow.style.display = 'flex';
+      yardageMetricEl.textContent = `${adjustedYardage.toLocaleString()} yards`;
+      rangeMetricEl.textContent = tee.range;
+
+      let funLabel = 'Balanced challenge';
+      if (challengeVal === 'easy') funLabel = 'Quicker & more relaxed';
+      if (challengeVal === 'tough') funLabel = 'More demanding setup';
+      funMetricEl.textContent = funLabel;
+
+      tipTextEl.style.display = 'block';
+
+      updateGearList(tee.key);
+    });
+
+    resetBtn.addEventListener('click', function () {
+      teeForm.reset();
+      driverError.textContent = '';
+      teeNameEl.textContent = 'Enter your details to see a tee suggestion.';
+      teeSubTextEl.textContent = 'This tool uses common rules of thumb used by teaching pros to match your distance to a comfortable course length.';
+      metricsRow.style.display = 'none';
+      tipTextEl.style.display = 'none';
+      updateGearList(null);
+    });
+
+    // Initialize gear list on load
+    updateGearList(null);
+  </script>
+</body>
+</html>
