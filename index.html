@@ -479,17 +479,20 @@
           </script>
         </div>
 
-        <!-- Simple affiliate block -->
+        <!-- Simple affiliate block (initial/default links) -->
         <h2>Recommended Gear for Your Tee Choice</h2>
         <ul class="gear-list" id="gearList">
           <li>
-            • <a href="#" target="_blank" rel="nofollow noopener">Premium distance golf balls</a>
+            • <a href="https://www.amazon.com/s?k=distance+golf+balls&tag=rjf5012-20"
+                 target="_blank" rel="nofollow noopener noreferrer">Popular distance golf balls</a>
           </li>
           <li>
-            • <a href="#" target="_blank" rel="nofollow noopener">Adjustable golf tees for consistent height</a>
+            • <a href="https://www.amazon.com/s?k=adjustable+golf+tees&tag=rjf5012-20"
+                 target="_blank" rel="nofollow noopener noreferrer">Adjustable golf tees for consistent height</a>
           </li>
           <li>
-            • <a href="#" target="_blank" rel="nofollow noopener">Launch monitor to dial in driver distance</a>
+            • <a href="https://www.amazon.com/s?k=portable+golf+launch+monitor&tag=rjf5012-20"
+                 target="_blank" rel="nofollow noopener noreferrer">Portable launch monitors</a>
           </li>
         </ul>
 
@@ -600,21 +603,25 @@
       let html = '';
 
       if (teeKey === 'red' || teeKey === 'gold') {
-        html += '<li>• <a href="#" target="_blank" rel="nofollow noopener">Higher launch game-improvement irons</a></li>';
-        html += '<li>• <a href="#" target="_blank" rel="nofollow noopener">Soft-feel golf balls for more control</a></li>';
-        html += '<li>• <a href="#" target="_blank" rel="nofollow noopener">Lightweight cart bag for easy walking</a></li>';
+        // Forward / Senior tees – softer feel, higher launch, forgiveness
+        html += '<li>• <a href="https://www.amazon.com/s?k=callaway+supersoft+golf+balls&tag=rjf5012-20" target="_blank" rel="nofollow noopener noreferrer">Callaway Supersoft golf balls</a></li>';
+        html += '<li>• <a href="https://www.amazon.com/s?k=senior+flex+hybrid+golf+club&tag=rjf5012-20" target="_blank" rel="nofollow noopener noreferrer">Senior-flex hybrid (easy launch)</a></li>';
+        html += '<li>• <a href="https://www.amazon.com/s?k=lightweight+golf+cart+bag&tag=rjf5012-20" target="_blank" rel="nofollow noopener noreferrer">Lightweight cart bag for easy walking</a></li>';
       } else if (teeKey === 'white' || teeKey === 'blue') {
-        html += '<li>• <a href="#" target="_blank" rel="nofollow noopener">Mid-spin tour performance balls</a></li>';
-        html += '<li>• <a href="#" target="_blank" rel="nofollow noopener">Rangefinder to dial in approach yardages</a></li>';
-        html += '<li>• <a href="#" target="_blank" rel="nofollow noopener">Alignment sticks for consistent setup</a></li>';
+        // Regular / Blue tees – mid/low handicap, typical golfers
+        html += '<li>• <a href="https://www.amazon.com/s?k=titleist+pro+v1+golf+balls&tag=rjf5012-20" target="_blank" rel="nofollow noopener noreferrer">Titleist Pro V1 golf balls</a></li>';
+        html += '<li>• <a href="https://www.amazon.com/s?k=golf+rangefinder+with+slope&tag=rjf5012-20" target="_blank" rel="nofollow noopener noreferrer">Slope-enabled golf rangefinder</a></li>';
+        html += '<li>• <a href="https://www.amazon.com/s?k=golf+alignment+sticks&tag=rjf5012-20" target="_blank" rel="nofollow noopener noreferrer">Alignment sticks for consistent setup</a></li>';
       } else if (teeKey === 'black') {
-        html += '<li>• <a href="#" target="_blank" rel="nofollow noopener">Low-spin tour balls for high swing speeds</a></li>';
-        html += '<li>• <a href="#" target="_blank" rel="nofollow noopener">Launch monitor to optimize driver numbers</a></li>';
-        html += '<li>• <a href="#" target="_blank" rel="nofollow noopener">Premium wedge set with fresh grooves</a></li>';
+        // Back tees – low handicap, high speed
+        html += '<li>• <a href="https://www.amazon.com/s?k=titleist+pro+v1x+golf+balls&tag=rjf5012-20" target="_blank" rel="nofollow noopener noreferrer">Titleist Pro V1x golf balls</a></li>';
+        html += '<li>• <a href="https://www.amazon.com/s?k=rapsodo+mobile+launch+monitor&tag=rjf5012-20" target="_blank" rel="nofollow noopener noreferrer">Rapsodo mobile launch monitor (or similar)</a></li>';
+        html += '<li>• <a href="https://www.amazon.com/s?k=cleveland+rtx+golf+wedge&tag=rjf5012-20" target="_blank" rel="nofollow noopener noreferrer">Cleveland RTX-style premium wedges</a></li>';
       } else {
-        html += '<li>• <a href="#" target="_blank" rel="nofollow noopener">Premium distance golf balls</a></li>';
-        html += '<li>• <a href="#" target="_blank" rel="nofollow noopener">Adjustable golf tees for consistent height</a></li>';
-        html += '<li>• <a href="#" target="_blank" rel="nofollow noopener">Launch monitor to dial in driver distance</a></li>';
+        // Default / unknown tee – general distance & control gear
+        html += '<li>• <a href="https://www.amazon.com/s?k=distance+golf+balls&tag=rjf5012-20" target="_blank" rel="nofollow noopener noreferrer">Popular distance golf balls</a></li>';
+        html += '<li>• <a href="https://www.amazon.com/s?k=adjustable+golf+tees&tag=rjf5012-20" target="_blank" rel="nofollow noopener noreferrer">Adjustable golf tees for consistent height</a></li>';
+        html += '<li>• <a href="https://www.amazon.com/s?k=portable+golf+launch+monitor&tag=rjf5012-20" target="_blank" rel="nofollow noopener noreferrer">Portable launch monitors</a></li>';
       }
 
       gearListEl.innerHTML = html;
