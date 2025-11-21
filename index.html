@@ -8,7 +8,7 @@
   <meta charset="UTF-8" />
   <title>Which Tees Should I Play? | Simple Golf Tee Selector</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Not sure which golf tees to play from? Use this simple tee selection calculator based on your driver distance, age, and handicap." />
+  <meta name="description" content="Not sure which golf tees to play from? Use this simple golf tee selection calculator based on your driver distance, age, and handicap." />
 
   <style>
     :root {
@@ -346,6 +346,58 @@
       margin: 4px 0;
     }
 
+    .seo-text ul {
+      padding-left: 18px;
+      margin: 4px 0 8px;
+    }
+
+    .seo-text table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 6px 0 10px;
+      font-size: 0.82rem;
+    }
+
+    .seo-text th,
+    .seo-text td {
+      border: 1px solid #283549;
+      padding: 6px 8px;
+      text-align: left;
+    }
+
+    .seo-text th {
+      background: #0f1a2a;
+      color: #d7e1f1;
+    }
+
+    .faq-card {
+      margin-top: 24px;
+    }
+
+    .faq-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      font-size: 0.86rem;
+      color: #9ca8bc;
+    }
+
+    .faq-list li + li {
+      margin-top: 10px;
+      padding-top: 8px;
+      border-top: 1px dashed #243247;
+    }
+
+    .faq-q {
+      font-weight: 600;
+      color: #e0e7f5;
+      margin-bottom: 2px;
+    }
+
+    .faq-a {
+      margin: 0;
+    }
+
     footer {
       margin-top: 28px;
       font-size: 0.75rem;
@@ -358,6 +410,80 @@
       text-decoration: none;
     }
   </style>
+
+  <!-- FAQ Schema for rich results -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How do I know which golf tees I should play from?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A common rule of thumb is to take your average driver carry distance and multiply it by about 36. That gives you a comfortable total course yardage. Our tee selection calculator uses your driver distance, age, handicap, and preferred challenge level to suggest the most appropriate set of tees."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What tees should I play if I drive the ball 200 yards?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "If your average driver carry is around 200 yards, a good starting point is courses under about 5,000 to 5,400 yards. That usually means forward tees or shorter senior tees on most golf courses."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What tees should I play if I drive the ball 240 yards?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "With a 240 yard driver carry, many golfers are most comfortable from total yardages around 6,000 to 6,400 yards. That often corresponds to regular white tees on many golf courses."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Should beginners play from the forward tees?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. New golfers and high handicaps should almost always start from the forward tees. It keeps approach shots shorter, improves pace of play, and makes the game more fun. As distance and consistency improve, you can move back."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Should I choose tees based on age, handicap, or distance?",
+        "acceptedAnswer": {
+          "@type": Answer,
+          "text": "Distance is the most important factor, but age and handicap also matter. Two golfers with the same driver distance might still choose different tees based on how consistent they are and how much challenge they want. This calculator blends all three factors."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is it bad to play from tees that are too long for my game?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Playing from tees that are too long usually leads to longer approach shots, more missed greens, higher scores, and slower pace of play. Most golfers have more fun and score better when they move up a set of tees."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I use this tee selector at any golf course?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. The calculator gives you a target range of total yardage and a suggested tee color. From there, you can match that range to the scorecard at your local course and pick the closest set of tees."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How often should I change which tees I play?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "If your distance, fitness, or handicap changes significantly, it is a good idea to reevaluate your tee selection. You can also move up or back for different conditions, like very windy days or wet, cold weather."
+        }
+      }
+    ]
+  }
+  </script>
 </head>
 <body>
   <div class="page">
@@ -509,24 +635,136 @@
             balloon. Playing a tee that’s slightly shorter usually means more wedges,
             more birdie chances, and more fun.
           </p>
-          <h3>General Yardage Guidelines</h3>
+
+          <h3>Golf Tee Distance Guide by Driver Carry</h3>
           <p>
-            For many golfers, comfortable total yardages fall into these rough ranges:
+            Use this quick tee distance guide as a starting point. Then refine it with the calculator above and your own on-course results.
+          </p>
+          <table>
+            <thead>
+              <tr>
+                <th>Average driver carry</th>
+                <th>Suggested total yardage</th>
+                <th>Typical tee box</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>180–200 yards</td>
+                <td>4,500–5,200 yards</td>
+                <td>Forward / Red or shorter Gold tees</td>
+              </tr>
+              <tr>
+                <td>200–220 yards</td>
+                <td>5,000–5,700 yards</td>
+                <td>Forward or Senior / Gold tees</td>
+              </tr>
+              <tr>
+                <td>220–240 yards</td>
+                <td>5,700–6,300 yards</td>
+                <td>White / Regular tees</td>
+              </tr>
+              <tr>
+                <td>240–260 yards</td>
+                <td>6,200–6,700 yards</td>
+                <td>White or Blue tees</td>
+              </tr>
+              <tr>
+                <td>260+ yards</td>
+                <td>6,700–7,200+ yards</td>
+                <td>Blue or Back / Championship tees</td>
+              </tr>
+            </tbody>
+          </table>
+          <p>
+            These numbers are guidelines, not strict rules. Wind, elevation, firmness of the fairways, and how often you hit greens in regulation all influence which tees will feel right for you on a given day.
+          </p>
+
+          <h3>Why Playing the Right Tees Matters</h3>
+          <p>
+            Most golfers secretly know when they are playing a course that is too long. Every par 4 feels like driver plus long iron, par 3s are all hybrids, and par 5s are three-shot holes even after a solid drive. Choosing the correct tee box can instantly make golf more fun without changing your swing.
+          </p>
+          <p>
+            Matching your tees to your true driver distance helps:
           </p>
           <ul>
-            <li>Forward / Red: under 4,800 yards</li>
-            <li>Gold / Senior: 4,800–5,600 yards</li>
-            <li>White / Regular: 5,600–6,400 yards</li>
-            <li>Blue: 6,400–7,000 yards</li>
-            <li>Back / Black: above 7,000 yards</li>
+            <li>Keep more wedges and short irons in your hands into greens.</li>
+            <li>Lower your scores without any swing change.</li>
+            <li>Speed up pace of play for your group and the course.</li>
+            <li>Reduce frustration from constantly hitting long approach shots.</li>
+          </ul>
+
+          <h3>Simple Rules for Picking Tees</h3>
+          <p>
+            If you are not sure where to start, use these simple rules of thumb:
+          </p>
+          <ul>
+            <li>If you rarely reach a par 4 in two shots, move up a set of tees.</li>
+            <li>If you are often hitting wedges into every green, you can experiment with moving back.</li>
+            <li>High-handicap and beginner golfers should almost always start from the forward tees.</li>
+            <li>Seniors, juniors, and players returning from injury should prioritize enjoyment and pace of play over total yardage.</li>
           </ul>
           <p>
-            Use this calculator as a starting point, then adjust based on how often
-            you’re actually reaching greens in regulation.
+            Use the calculator on this page as a quick tee recommendation tool, then adjust based on how much you value challenge versus fun.
           </p>
         </div>
       </aside>
     </main>
+
+    <!-- FAQ Section for on-page SEO -->
+    <section class="card faq-card">
+      <h2>Frequently Asked Questions About Which Tees to Play</h2>
+      <ul class="faq-list">
+        <li>
+          <div class="faq-q">How do I know which tees I should play from?</div>
+          <p class="faq-a">
+            Start with your average driver carry distance. Multiply that number by about 36 to get a comfortable total yardage, then compare that to the scorecard at your course. Our tee selection calculator does that math for you and adjusts for age, handicap, and how tough you want the course to feel.
+          </p>
+        </li>
+        <li>
+          <div class="faq-q">What tees should I play if I drive the ball 200 yards?</div>
+          <p class="faq-a">
+            If your typical carry is around 200 yards, look for tees under about 5,000 to 5,400 yards. That usually means forward or shorter senior tees. From there, adjust based on how often you’re reaching par 4s in two and par 5s in three.
+          </p>
+        </li>
+        <li>
+          <div class="faq-q">What tees should I play if I drive the ball 240 yards?</div>
+          <p class="faq-a">
+            At 240 yards of driver carry, many golfers score best from roughly 6,000 to 6,400 yards total. On most scorecards that lines up with white or regular tees, or a combo of white and blue if the course offers it.
+          </p>
+        </li>
+        <li>
+          <div class="faq-q">Should my tee choice be based on age, handicap, or distance?</div>
+          <p class="faq-a">
+            Distance is the most important input, but age and handicap tell you how consistent you are. Two golfers with the same distance might choose different tees if one is a new player and the other is a low handicap who wants a tougher test. The calculator blends all three to give a balanced suggestion.
+          </p>
+        </li>
+        <li>
+          <div class="faq-q">Is it bad to play a tee box that is too long?</div>
+          <p class="faq-a">
+            It’s not “wrong,” but it usually isn’t fun. Playing tees that are too long means more long irons and hybrids into greens, higher scores, and slower pace of play. Most golfers shoot better scores and enjoy the game more when they move up a set of tees.
+          </p>
+        </li>
+        <li>
+          <div class="faq-q">Should beginners always use the forward tees?</div>
+          <p class="faq-a">
+            Yes, almost always. New golfers benefit from shorter approach shots, less pressure, and more chances to hit greens in regulation. As confidence, distance, and consistency improve, they can slowly experiment with moving back.
+          </p>
+        </li>
+        <li>
+          <div class="faq-q">Can I use this tee selector for any course?</div>
+          <p class="faq-a">
+            Yes. The tool gives you a recommended total yardage and tee color, which you then match to whatever tees are closest on the scorecard at your local course. It works for public, private, resort, and tournament setups.
+          </p>
+        </li>
+        <li>
+          <div class="faq-q">How often should I change which tees I play?</div>
+          <p class="faq-a">
+            Any time your distance, fitness, or handicap changes noticeably, it’s worth checking your tee selection again. You can also temporarily move up on very windy, cold, or wet days to keep the course playing fair for your current game.
+          </p>
+        </li>
+      </ul>
+    </section>
 
     <footer>
       This tool is for general guidance only and doesn’t replace course or pro recommendations.
