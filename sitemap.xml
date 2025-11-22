@@ -3,28 +3,28 @@
   
   <!-- Home / Tool -->
   <url>
-    <loc>https://rightteesgolf.com/</loc>
+    <loc>https://bestteesforme.com/</loc>
     <changefreq>daily</changefreq>
     <priority>1.00</priority>
   </url>
 
   <!-- Long-form tee guide -->
   <url>
-    <loc>https://rightteesgolf.com/golf-tee-guide.html</loc>
+    <loc>https://bestteesforme.com/golf-tee-guide.html</loc>
     <changefreq>weekly</changefreq>
     <priority>0.80</priority>
   </url>
 
   <!-- About page -->
   <url>
-    <loc>https://rightteesgolf.com/about.html</loc>
+    <loc>https://bestteesforme.com/about.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.40</priority>
   </url>
 
   <!-- Privacy policy -->
   <url>
-    <loc>https://rightteesgolf.com/privacy.html</loc>
+    <loc>https://bestteesforme.com/privacy.html</loc>
     <changefreq>yearly</changefreq>
     <priority>0.30</priority>
   </url>
